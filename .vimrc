@@ -76,22 +76,22 @@ function! AirlineInit()
   let g:airline_section_b = airline#section#create_left(['branch', 'hunks'])
   let g:airline_section_c = airline#section#create_left(['%t'])
 
-  " Combine Line:Col and Search into X, and disable Y entirely to kill UTF
+  " Combine Line:Col and Search into X, Wordcount in Y (was blank), Filetype/Theme in Z
   let g:airline_section_x = airline#section#create_right(['%l:%c', '%{airline#extensions#searchcount#status()}'])
-  let g:airline_section_y = ''
+  let g:airline_section_y = airline#section#create_right(['wordcount'])
   " Z: Filetype and current active theme
   let g:airline_section_z = airline#section#create_right(['filetype', ' %{exists("g:colors_name") ? g:colors_name : ""}'])
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
-" Remove UTF, format, and whitespace warnings using the official layout method
+" Include 'y' back in the layout now that it holds wordcount instead of UTF
 let g:airline#extensions#default#layout = [
   \ [ 'a', 'b', 'c' ],
-  \ [ 'x', 'z' ]
+  \ [ 'x', 'y', 'z' ]
   \ ]
 
 " Force disable the specific extensions that generate the UTF info
-let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#wordcount#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_warning = ''
 let g:airline_section_error = ''
