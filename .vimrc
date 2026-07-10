@@ -76,18 +76,18 @@ function! AirlineInit()
   let g:airline_section_b = airline#section#create_left(['branch', 'hunks'])
   let g:airline_section_c = airline#section#create_left(['%t'])
 
-  " Combine Line:Col and Search into X, Wordcount in Y (was blank), Filetype/Theme in Z
-  let g:airline_section_x = airline#section#create_right(['%l:%c', '%{airline#extensions#searchcount#status()}'])
-  let g:airline_section_y = airline#section#create_right(['wordcount'])
+  " Combine Wordcount, Line:Col, and Search into X, and disable Y entirely to permanently kill UTF
+  let g:airline_section_x = airline#section#create_right(['wordcount', '%l:%c', '%{airline#extensions#searchcount#status()}'])
+  let g:airline_section_y = ''
   " Z: Filetype and current active theme
   let g:airline_section_z = airline#section#create_right(['filetype', ' %{exists("g:colors_name") ? g:colors_name : ""}'])
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
-" Include 'y' back in the layout now that it holds wordcount instead of UTF
+" Permanently kill Y section layout to prevent UTF injection
 let g:airline#extensions#default#layout = [
   \ [ 'a', 'b', 'c' ],
-  \ [ 'x', 'y', 'z' ]
+  \ [ 'x', 'z' ]
   \ ]
 
 " Force disable the specific extensions that generate the UTF info
