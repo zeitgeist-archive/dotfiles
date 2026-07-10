@@ -79,8 +79,8 @@ function! AirlineInit()
   " Combine Wordcount, Line:Col, and Search into X, and disable Y entirely to permanently kill UTF
   let g:airline_section_x = airline#section#create_right(['%{airline#extensions#wordcount#get()}', '%l:%c', '%{airline#extensions#searchcount#status()}'])
   let g:airline_section_y = ''
-  " Z: Filetype and current active theme
-  let g:airline_section_z = airline#section#create_right(['filetype', ' %{exists("g:colors_name") ? g:colors_name : ""}'])
+  " Z: Current active theme only (removed filetype to save space)
+  let g:airline_section_z = airline#section#create_right([' %{exists("g:colors_name") ? g:colors_name : ""}'])
 endfunction
 autocmd User AirlineAfterInit call AirlineInit()
 
