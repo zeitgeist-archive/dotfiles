@@ -77,7 +77,7 @@ function! AirlineInit()
   let g:airline_section_c = airline#section#create_left(['%t'])
 
   " Combine Wordcount, Line:Col, and Search into X, and disable Y entirely to permanently kill UTF
-  let g:airline_section_x = airline#section#create_right(['wordcount', '%l:%c', '%{airline#extensions#searchcount#status()}'])
+  let g:airline_section_x = airline#section#create_right(['%{airline#extensions#wordcount#get()}', '%l:%c', '%{airline#extensions#searchcount#status()}'])
   let g:airline_section_y = ''
   " Z: Filetype and current active theme
   let g:airline_section_z = airline#section#create_right(['filetype', ' %{exists("g:colors_name") ? g:colors_name : ""}'])
@@ -90,8 +90,8 @@ let g:airline#extensions#default#layout = [
   \ [ 'x', 'z' ]
   \ ]
 
-" Force disable the specific extensions that generate the UTF info
-let g:airline#extensions#wordcount#enabled = 1
+" Configure wordcount to just show the number (no extra text)
+let g:airline#extensions#wordcount#formatter = 'default'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_warning = ''
 let g:airline_section_error = ''
