@@ -90,9 +90,14 @@ let g:airline#extensions#default#layout = [
   \ [ 'x', 'z' ]
   \ ]
 
-" Configure wordcount to just show the number (no extra text)
+" Configure wordcount to just show the number and prevent double-rendering
 let g:airline#extensions#wordcount#formatter = 'default'
-let g:airline#extensions#whitespace#enabled = 0
+" Turn off the auto-extension to kill the one next to the filename
+let g:airline#extensions#wordcount#enabled = 0 
+let g:airline#extensions#default#layout = [
+  \ [ 'a', 'b', 'c' ],
+  \ [ 'x', 'z' ]
+  \ ]let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_warning = ''
 let g:airline_section_error = ''
 " ------------------------------------
